@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/registration_validation/db" VERSION="20250515" COMMENT="DB schema for registration plugin" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../lib/xmldb/xmldb.xsd">
+    <TABLES>
+        <TABLE NAME="local_registration_users" COMMENT="Stores custom registration user data">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="Primary key"/>
+                <FIELD NAME="dpi" TYPE="char" LENGTH="13" NOTNULL="true" COMMENT="DPI/CUI 13-digit"/>
+                <FIELD NAME="username" TYPE="varchar" LENGTH="100" NOTNULL="true" COMMENT="Username"/>
+                <FIELD NAME="password" TYPE="varchar" LENGTH="255" NOTNULL="true" COMMENT="Hashed password"/>
+                <FIELD NAME="email" TYPE="varchar" LENGTH="100" NOTNULL="true" COMMENT="Email"/>
+                <FIELD NAME="firstname" TYPE="varchar" LENGTH="100" NOTNULL="true" COMMENT="First name"/>
+                <FIELD NAME="lastname" TYPE="varchar" LENGTH="100" NOTNULL="true" COMMENT="Last name"/>
+                <FIELD NAME="gender" TYPE="varchar" LENGTH="10" NOTNULL="true" COMMENT="Gender"/>
+                <FIELD NAME="phone" TYPE="varchar" LENGTH="20" NOTNULL="true" COMMENT="Phone number"/>
+                <FIELD NAME="age" TYPE="int" LENGTH="3" NOTNULL="true" COMMENT="Age"/>
+                <FIELD NAME="department" TYPE="varchar" LENGTH="100" NOTNULL="true" COMMENT="Department"/>
+                <FIELD NAME="municipality" TYPE="varchar" LENGTH="100" NOTNULL="true" COMMENT="Municipality"/>
+                <FIELD NAME="ethnicity" TYPE="varchar" LENGTH="100" NOTNULL="true" COMMENT="Ethnicity"/>
+                <FIELD NAME="professional_sector" TYPE="varchar" LENGTH="150" NOTNULL="true" COMMENT="Professional Sector"/>
+                <FIELD NAME="institution" TYPE="varchar" LENGTH="150" NOTNULL="true" COMMENT="Institution"/>
+                <FIELD NAME="professional_college" TYPE="varchar" LENGTH="150" NOTNULL="true" COMMENT="Professional College"/>
+                <FIELD NAME="member_number" TYPE="varchar" LENGTH="100" NOTNULL="true" COMMENT="Member Number"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" COMMENT="Creation time"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" COMMENT="Modification time"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="unique_dpi" TYPE="unique" FIELDS="dpi"/>
+                <KEY NAME="unique_username" TYPE="unique" FIELDS="username"/>
+                <KEY NAME="unique_email" TYPE="unique" FIELDS="email"/>
+            </KEYS>
+        </TABLE>
+    </TABLES>
+</XMLDB>
