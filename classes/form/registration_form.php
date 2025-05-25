@@ -143,3 +143,5 @@ class registration_form extends \moodleform {
 
         return $errors;
     }
+}
+?>
