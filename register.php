@@ -50,7 +50,7 @@ if ($form->is_cancelled()) {
         $record->timemodified = time();
 
         $DB->insert_record('local_registration_users', $record);
-
+        $SESSION->registration_success = true;
         redirect(new moodle_url('/local/registration_validation/success.php'));
     }
 }
@@ -58,3 +58,4 @@ if ($form->is_cancelled()) {
 echo $OUTPUT->header();
 $form->display();
 echo $OUTPUT->footer();
+?>

@@ -1,7 +1,7 @@
 <?php
 // Language strings for registration plugin
 
-$string['pluginname'] = 'Custom Registration & Validation Plugin';
+$string['pluginname'] = 'Student Registration';
 $string['dpicode'] = 'DPI/CUI (13-digit)';
 $string['dpicodeerror'] = 'DPI must be exactly 13 digits.';
 $string['usernameexists'] = 'Username already exists.';
