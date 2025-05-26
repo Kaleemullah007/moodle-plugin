@@ -20,6 +20,7 @@
                 <FIELD NAME="institution" TYPE="text" LENGTH="150" NOTNULL="true" COMMENT="Institution"/>
                 <FIELD NAME="professional_college" TYPE="text" LENGTH="150" NOTNULL="true" COMMENT="Professional College"/>
                 <FIELD NAME="member_number" TYPE="text" LENGTH="100" NOTNULL="true" COMMENT="Member Number"/>
+              
                 <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" COMMENT="Creation time"/>
                 <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" COMMENT="Modification time"/>
             </FIELDS>
