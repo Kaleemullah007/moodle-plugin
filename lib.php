@@ -88,3 +88,31 @@ function local_registration_validation_notify_user($userid, $subject, $message) 
 
     return message_send($eventdata);
 }
+
+function local_registration_validation_get_file_areas($course, $cm, $context) {
+    return [
+        'experience_certificate' => get_string('experience_certificate', 'local_registration_validation')
+    ];
+}
+
+
+function local_registration_validation_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = []) {
+    if ($filearea !== 'certificate') {
+        return false;
+    }
+
+    // require_login(); // Ensure user is logged in
+
+    $itemid = array_shift($args);
+    $filename = array_pop($args);
+    $filepath = $args ? '/' . implode('/', $args) . '/' : '/';
+
+    $fs = get_file_storage();
+    $file = $fs->get_file($context->id, 'local_registration_validation', 'certificate', $itemid, $filepath, $filename);
+
+    if (!$file || $file->is_directory()) {
+        return false;
+    }
+
+    send_stored_file($file, 0, 0, $forcedownload, $options);
+}
