@@ -5,6 +5,29 @@ defined('MOODLE_INTERNAL') || die();
 require_once($CFG->libdir . '/formslib.php');
 
 
+// function add_field_in_col6($mform, $type, $name, $label, $options = []) {
+//     $output = '<div class="col-md-6 d-flex align-items-center">';
+//     $output .= '<div class="col-md-4"><label for="'.$name.'">'.$label.'</label></div>';
+//     $output .= '<div class="col-md-8">';
+//     $mform->addElement('html', $output);
+
+//     switch ($type) {
+//         case 'text':
+//             if(!empty($options))
+//             $mform->addElement('text', $name, '');
+//             break;
+//         case 'password':
+//             $mform->addElement('password', $name, '');
+//             break;
+//         case 'select':
+//             $mform->addElement('select', $name, '', $options);
+//             break;
+//     }
+
+//     $mform->addElement('html', '</div></div>'); // close input div and col-md-6
+// }
+
+
 function add_field_in_col6($mform, $type, $name, $label, $options = []) {
     $output = '<div class="col-md-6 d-flex align-items-center">';
     $output .= '<div class="col-md-4"><label for="'.$name.'">'.$label.'</label></div>';
@@ -13,11 +36,27 @@ function add_field_in_col6($mform, $type, $name, $label, $options = []) {
 
     switch ($type) {
         case 'text':
-            $mform->addElement('text', $name, '');
+            $attributes = !empty($options) ? $options : [];
+            $mform->addElement('text', $name, '', $attributes);
+            if($name == 'dpi')
+            {
+                $script = "<script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const input = document.querySelector('[name=\"$name\"]');
+                    input.addEventListener('input', function () {
+                        this.value = this.value.replace(/[^0-9]/g, '');
+                    });
+                });
+            </script>";
+            $mform->addElement('html', $script);
+            }
             break;
+
         case 'password':
-            $mform->addElement('password', $name, '');
+            $attributes = !empty($options) ? $options : [];
+            $mform->addElement('password', $name, '', $attributes);
             break;
+
         case 'select':
             $mform->addElement('select', $name, '', $options);
             break;
@@ -25,6 +64,7 @@ function add_field_in_col6($mform, $type, $name, $label, $options = []) {
 
     $mform->addElement('html', '</div></div>'); // close input div and col-md-6
 }
+
 
 
 
@@ -69,10 +109,34 @@ class registration_form extends \moodleform {
 
 
 
-// die();
+// // die();
+// $mform->addElement('text', 'dpi', get_string('dpicode', 'local_registration_validation'), ['maxlength' => '13', 'pattern' => '[0-9]{1,13}', 'title' => 'Enter up to 13 digits only', 'inputmode' => 'numeric']);
+// $mform->setType('dpi', PARAM_TEXT); // 
+// add_field_in_col6($mform, 'text', 'dpi', get_string('dpicode', 'local_registration_validation'), [
+//     'maxlength' => '13',
+//     'pattern' => '[0-9]{1,13}',
+//     'title' => 'Enter up to 13 digits only',
+//     'inputmode' => 'numeric'
+// ]);
 
 $fields = [
-    ['type'=>'text', 'name'=>'dpi', 'label'=>get_string('dpicode', 'local_registration_validation')],
+    // ['type'=>'text', 'name'=>'dpi', 'label'=>get_string('dpicode', 'local_registration_validation'),'attributes' => [
+    //     'maxlength' => 13,
+    //     'pattern' => '\d{1,13}', // optional: ensures only digits
+    //     'title' => 'Enter up to 13 digits only',
+    //     'inputmode' => 'numeric' // optional: helps on mobile
+    // ]],
+    [
+    'type' => 'text',
+    'name' => 'dpi',
+    'label' => get_string('dpicode', 'local_registration_validation'),
+    'options' => [
+        'maxlength' => '13',
+        'pattern' => '[0-9]{1,13}',
+        'title' => 'Enter up to 13 digits only',
+        'inputmode' => 'numeric'
+    ]
+    ],
     ['type'=>'text', 'name'=>'username', 'label'=>get_string('username')],
     ['type'=>'password', 'name'=>'password', 'label'=>get_string('password')],
     ['type'=>'text', 'name'=>'email', 'label'=>get_string('email')],
@@ -218,19 +282,19 @@ $mform->getElement('categoryid')->load($categories);
 //     ]
 // );
 
-// $mform->addElement('filepicker', 'certificatefile', get_string('certificatefile', 'local_registration_validation'), null, [
-//     'accepted_types' => ['.pdf', '.jpg', '.jpeg', '.png'],
-//     'maxbytes' => 0
-// ]);
-// $mform->addRule('certificatefile', null, 'required', null, 'client');
+$mform->addElement('filepicker', 'certificatefile', get_string('certificatefile', 'local_registration_validation'), null, [
+    'accepted_types' => ['.pdf', '.jpg', '.jpeg', '.png'],
+    'maxbytes' => 0
+]);
+$mform->addRule('certificatefile', null, 'required', null, 'client');
 
 
-$mform->addElement('filemanager', 'certificatefile', get_string('certificatefile', 'local_registration_validation'), null, array(
-    'subdirs' => 0,
-    'maxbytes' => 10485760, // 10 MB
-    'maxfiles' => 1,
-    'accepted_types' => ['*.pdf', '*.jpg', '*.png']
-));
+// $mform->addElement('filemanager', 'certificatefile', get_string('certificatefile', 'local_registration_validation'), null, array(
+//     'subdirs' => 0,
+//     'maxbytes' => 10485760, // 10 MB
+//     'maxfiles' => 1,
+//     'accepted_types' => ['*.pdf', '*.jpg', '*.png']
+// ));
 
 
 // Optional: Add a help button or static info
