@@ -37,4 +37,4 @@ $string['experience_start_date'] = 'Start Date';
 $string['experience_expiry_date'] = 'Expiry Date';
 $string['accepted_filetypes_hint'] = 'Accepted file types: PDF (.pdf), Image (.jpg, .jpeg, .png)';
 $string['certificatefile'] = 'Certificate';
-$string['age'] = 'How old are you?';
+$string['age'] = 'How old are you?';$string['upload_file'] = 'Upload file';

@@ -20,7 +20,73 @@ if ($form->is_cancelled()) {
 } else if ($data = $form->get_data()) {
     global $DB,$USER;
 
+// if (!empty($_FILES['exp_file2']) && $_FILES['exp_file2']['error'] === UPLOAD_ERR_OK) {
+//     $fs = get_file_storage();
 
+//     // Prepare file record object
+//     $context = \context_system::instance(); // or another appropriate context
+
+//     $file_record = [
+//         'contextid' => $context->id,
+//         'component' => 'local_registration_validation', // your plugin component
+//         'filearea' => 'exp_files', // a custom filearea name
+//         'itemid' => $USER->id, // link file to user or item id
+//         'filepath' => '/',
+//         'filename' => $_FILES['exp_file2']['name']
+//     ];
+
+//     // Save file in Moodle's file storage
+//     $stored_file = $fs->create_file_from_pathname($file_record, $_FILES['exp_file2']['tmp_name']);
+
+//     if ($stored_file) {
+//         echo "File uploaded successfully!";
+//     } else {
+//         echo "Failed to save file!";
+//     }
+// } else {
+//     echo "No file uploaded or upload error!";
+// }
+echo 'post_max_size = ' . ini_get('post_max_size') . "\n";
+echo 'upload_max_filesize = ' . ini_get('upload_max_filesize') . "\n";
+echo "<pre>";
+
+// die($_SERVER['REQUEST_METHOD']);
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['testfile'])) {
+    $filename = $_FILES['testfile']['name'];
+    $tmp = $_FILES['testfile']['tmp_name'];
+$unique = time() . '_' . rand(1000, 9999);
+$filename = $unique . '_' . clean_param($filename, PARAM_FILE);
+    // Allowed MIME types
+    $allowed = [
+        'image/png',
+        'image/jpeg',
+        'application/pdf'
+    ];
+    $mime = mime_content_type($tmp);
+    if (!in_array($mime, $allowed)) {
+        die('Invalid file type. Only PNG, JPG, and PDF files are allowed.');
+    }
+
+     $destination = $CFG->dataroot . '/temp/uploaded_files/';
+    
+    if (!file_exists($destination)) {
+        mkdir($destination, 0777, true);
+    }
+
+    $saved = move_uploaded_file($tmp, $destination . basename($filename));
+
+    if ($saved) {
+        echo 'File uploaded successfully!';
+    } else {
+        echo 'Failed to upload file.';
+    }
+    exit;
+}
+var_dump($_FILES);
+var_dump($data);
+echo "</pre>";
+    die();
+die('File uploaded successfully!');
     
 
     // Check for existing username, email or DPI before inserting
