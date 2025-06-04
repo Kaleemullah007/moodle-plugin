@@ -2,49 +2,6 @@
 namespace local_registration_validation\form;
 defined('MOODLE_INTERNAL') || die();
 
-
-
-
-// // Moodle login credentials
-// $username = 'maglui7';
-// $password = 'MoodleUp25+';
-
-// // Moodle login URL
-// $loginUrl = 'https://formacion.cgc.gob.gt/login/index.php';
-
-
-// // Prepare POST data
-// $postFields = http_build_query([
-//     'username' => $username,
-//     'password' => $password
-// ]);
-
-// // Initialize cURL session
-// $ch = curl_init();
-
-// curl_setopt_array($ch, [
-//     CURLOPT_URL => $loginUrl,
-//     CURLOPT_POST => true,
-//     CURLOPT_POSTFIELDS => $postFields,
-//     CURLOPT_RETURNTRANSFER => true,
-//     CURLOPT_FOLLOWLOCATION => true,
-//     CURLOPT_SSL_VERIFYPEER => false,
-//     CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
-// ]);
-
-// // Execute login request
-// $response = curl_exec($ch);
-
-// // Optional: Access a protected page after login
-
-// // Close cURL session
-// // curl_close($ch);
-
-// // Show the dashboard HTML (for debug)
-// echo "<pre>";
-// print_r($response);
-// die();
-
 require_once($CFG->libdir . '/formslib.php');
 
 
@@ -112,10 +69,18 @@ function add_field_in_col6($mform, $type, $name, $label, $options = []) {
 
 
 class registration_form extends \moodleform {
+    
+
     public function definition() {
         $mform = $this->_form;
         global $USER,$DB;
-        
+    //             $attrs = $mform->getAttributes();
+
+    // // Add/override enctype, keep other attributes intact
+    // $attrs['enctype'] = 'multipart/form-data';
+
+    // // Set back the merged attributes
+    // $mform->setAttributes($attrs);
 // $context = \context_user::instance($USER->id);
 
 // $fs = get_file_storage();
@@ -330,6 +295,72 @@ $mform->getElement('categoryid')->load($categories);
 //     'maxbytes' => 0
 // ]);
 // $mform->addRule('certificatefile', null, 'required', null, 'client');
+ $mform->addElement('html', '<label for="exp_file2">'.get_string('upload_file', 'local_registration_validation').'</label><br>');
+        $mform->addElement('html', '<input type="file" name="exp_file2" id="exp_file2" accept=".png,.jpg,.jpeg,.pdf" required><br><br>');
+
+
+// $output = '<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 20px;">';
+
+// // First Row
+// $output .= '<div>';
+// $output .= '<label for="exp_file1">Experience Certificate 1:</label><br>';
+// $output .= '<input type="file" name="exp_file1" id="exp_file1" accept=".png,.jpeg,.jpg" required>';
+// $output .= '</div>';
+
+// $output .= '<div>';
+// $output .= '<label for="start_date1">Start Date 1:</label><br>';
+// $output .= '<input type="date" name="start_date1" id="start_date1"  class="form-control">';
+// $output .= '</div>';
+
+// $output .= '<div>';
+// $output .= '<label for="end_date1">End Date 1:</label><br>';
+// $output .= '<input type="date" name="end_date1" id="end_date1"  class="form-control">';
+// $output .= '</div>';
+
+// $output .= '</div>'; // end first row grid
+
+// // Second Row
+// $output .= '<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">';
+
+// $output .= '<div>';
+// $output .= '<label for="exp_file2">Document Certificate 2:</label><br>';
+// $output .= '<input type="file" name="exp_file2" id="exp_file2" accept=".pdf,.doc,.docx">';
+// $output .= '</div>';
+
+// $output .= '<div>';
+// $output .= '<label for="start_date2">Start Date 2:</label><br>';
+// $output .= '<input type="date" name="start_date2" id="start_date2" class="form-control">';
+// $output .= '</div>';
+
+// $output .= '<div>';
+// $output .= '<label for="end_date2">End Date 2:</label><br>';
+// $output .= '<input type="date" name="end_date2" id="end_date2" class="form-control">';
+// $output .= '</div>';
+
+// $output .= '</div>'; // end second row grid
+
+// // Third Row
+// $output .= '<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">';
+
+// $output .= '<div>';
+// $output .= '<label for="exp_file2">Document Certificate 3:</label><br>';
+// $output .= '<input type="file" name="exp_file2" id="exp_file2" accept=".pdf,.doc,.docx">';
+// $output .= '</div>';
+
+// $output .= '<div>';
+// $output .= '<label for="start_date2">Start Date 2:</label><br>';
+// $output .= '<input type="date" name="start_date2" id="start_date2" class="form-control">';
+// $output .= '</div>';
+
+// $output .= '<div>';
+// $output .= '<label for="end_date2">End Date 2:</label><br>';
+// $output .= '<input type="date" name="end_date2" id="end_date2" class="form-control">';
+// $output .= '</div>';
+
+// $output .= '</div>'; // end second row grid
+
+
+// $mform->addElement('html', $output);
 
 
 
@@ -348,8 +379,6 @@ $mform->getElement('categoryid')->load($categories);
     
 
 // Start Date of Experience
-// $mform->addElement('file', 'testfile', 'Professional Certificate');
-//         $mform->addRule('testfile', null, 'required');
 // $mform->addElement('date_selector', 'experience_start_date', get_string('experience_start_date', 'local_registration_validation'));
 // $mform->addRule('experience_start_date', null, 'required', null, 'client');
 
@@ -357,82 +386,11 @@ $mform->getElement('categoryid')->load($categories);
 // $mform->addElement('date_selector', 'experience_expiry_date', get_string('experience_expiry_date', 'local_registration_validation'));
 // $mform->addRule('experience_expiry_date', null, 'required', null, 'client');
 
-// Start a new row
-// Open custom row container
-// $mform->addElement('html', '<div class="row"><div class="col-12 mb-4">');
-// $mform->addElement('html', '<div class="row"><div class="col-12">');
-// $mform->addElement('file', 'testfile', 'Professional Certificate');
-// $mform->addRule('testfile', null, 'required');
-// $mform->addElement('html', '</div></div>');
-// $mform->addElement('html', '<div class="row"><div class="col-12">');
-// $mform->addElement('date_selector', 'experience_start_date', get_string('experience_start_date', 'local_registration_validation'));
-// $mform->addRule('experience_start_date', null, 'required', null, 'client');
-// $mform->addElement('html', '</div></div>');
-
-// $mform->addElement('html', '<div class="row"><div class="col-12">');
-// $mform->addElement('date_selector', 'experience_expiry_date', get_string('experience_expiry_date', 'local_registration_validation'));
-// $mform->addRule('experience_expiry_date', null, 'required', null, 'client');
-// $mform->addElement('html', '</div></div>');
-
-// $mform->addElement('html', '</div></div>');
-// Open row container
-$mform->addElement('html', '<div class="row><div class=" mb-4">');
-
-// File upload (Column 1)
-$mform->addElement('html', '<div class="">');
-$mform->addElement('file', 'testfile', 'Professional Certificate');
-$mform->addRule('testfile', null, 'required');
-$mform->addElement('html', '</div>');
-
-// Start date (Column 2)
-$mform->addElement('html', '<div class="">');
-$mform->addElement('date_selector', 'experience_start_date', get_string('experience_start_date', 'local_registration_validation'));
-$mform->addRule('experience_start_date', null, 'required', null, 'client');
-$mform->addElement('html', '</div>');
-
-// Expiry date (Column 3)
-$mform->addElement('html', '<div class="">');
-$mform->addElement('date_selector', 'experience_expiry_date', get_string('experience_expiry_date', 'local_registration_validation'));
-$mform->addRule('experience_expiry_date', null, 'required', null, 'client');
-$mform->addElement('html', '</div>');
-
-// Close row container
-$mform->addElement('html', '</div></div>');
-
-
-
-$mform->addElement('html', '<div class="row><div class=" mb-4">');
-
-// File upload (Column 1)
-$mform->addElement('html', '<div class="">');
-
-$mform->addElement('file', 'doc_dpi', 'Copy Of DPI');
-        $mform->addRule('testfile', null, '');
-$mform->addElement('html', '</div>');
-
-// Start date (Column 2)
-$mform->addElement('html', '<div class="">');
-
-
-        $mform->addElement('file', 'contract', 'Contract ');
-        $mform->addRule('contract', null, '');
-$mform->addElement('html', '</div>');
-
-
-// Close row container
-$mform->addElement('html', '</div></div>');
-
-
-
-
 
 
 // $this->add_action_buttons(false, get_string('register', 'local_registration_validation'));
-// $mform->addElement('html', '<div class="row"><div class="col-md-12 d-flex justify-content-center">');
-// $this->add_action_buttons(false, get_string('register', 'local_registration_validation'));
-// $mform->addElement('html', '</div></div>');
-$mform->addElement('html', '<div class="row"><div class="col-md-12 text-center mt-4">');
-$mform->addElement('html', '<button type="submit" class="btn btn-primary">Register</button>');
+$mform->addElement('html', '<div class="row"><div class="col-md-12 d-flex justify-content-center">');
+$this->add_action_buttons(false, get_string('register', 'local_registration_validation'));
 $mform->addElement('html', '</div></div>');
 
 //         // Start first row
@@ -653,7 +611,13 @@ $mform->addElement('html', '</div></div>');
 
         // $this->add_action_buttons(false, get_string('register', 'local_registration_validation'));
     }
-
+ public function definition_after_data() {
+    // This runs after form data is set and form is built,
+    // so we can directly add enctype attribute here:
+    $this->_form->_attributes['enctype'] = 'multipart/form-data';
+    // echo "d";
+    // die(0);
+}
     public function validation($data, $files) {
         $errors = parent::validation($data, $files);
 
@@ -847,19 +811,19 @@ $mform->addElement('html', '</div></div>');
 
 
     // Validate Start and Expiry Dates
-    if (empty($data['experience_start_date'])) {
-        $errors['experience_start_date'] = get_string('requiredfield', 'local_registration_validation');
-    }
+    // if (empty($data['experience_start_date'])) {
+    //     $errors['experience_start_date'] = get_string('requiredfield', 'local_registration_validation');
+    // }
 
-    if (empty($data['experience_expiry_date'])) {
-        $errors['experience_expiry_date'] = get_string('requiredfield', 'local_registration_validation');
-    }
+    // if (empty($data['experience_expiry_date'])) {
+    //     $errors['experience_expiry_date'] = get_string('requiredfield', 'local_registration_validation');
+    // }
 
-    if (!empty($data['experience_start_date']) && !empty($data['experience_expiry_date'])) {
-        if ($data['experience_expiry_date'] <= $data['experience_start_date']) {
-            $errors['experience_expiry_date'] = get_string('expiry_after_start', 'local_registration_validation');
-        }
-    }
+    // if (!empty($data['experience_start_date']) && !empty($data['experience_expiry_date'])) {
+    //     if ($data['experience_expiry_date'] <= $data['experience_start_date']) {
+    //         $errors['experience_expiry_date'] = get_string('expiry_after_start', 'local_registration_validation');
+    //     }
+    // }
 
         return $errors;
     }

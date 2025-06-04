@@ -40,3 +40,4 @@ $string['courses'] = 'Courses';
 $string['choosecourse'] = 'Select one or more courses';
 $string['certificatefile'] = 'Certificate';
 $string['Age'] = 'How old are you?';
+$string['upload_file'] = 'Upload file';
