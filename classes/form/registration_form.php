@@ -863,5 +863,230 @@ $mform->addElement('html', '</div></div>');
 
         return $errors;
     }
+
 }
+
+
+
+// $mform->addElement('html', '<div class="form-step" id="step1">');
+
+// $mform->addElement('html', '<div class="form-step" id="step1">');
+
+// add_field_in_col6($mform, 'text', 'dpi', get_string('dpicode', 'local_registration_validation'), [...]);
+// add_field_in_col6($mform, 'text', 'username', get_string('username'));
+// add_field_in_col6($mform, 'password', 'password', get_string('password'));
+// add_field_in_col6($mform, 'text', 'email', get_string('email'));
+// add_field_in_col6($mform, 'text', 'firstname', get_string('firstname'));
+// add_field_in_col6($mform, 'text', 'lastname', get_string('lastname'));
+// add_field_in_col6($mform, 'select', 'gender', get_string('gender', 'local_registration_validation'), [...]);
+// add_field_in_col6($mform, 'text', 'phone', get_string('phone','local_registration_validation'));
+// add_field_in_col6($mform, 'text', 'age', get_string('age','local_registration_validation'));
+
+// $mform->addElement('html', '</div>'); // Close step1
+
+
+
+
+// $mform->addElement('html', '<div class="form-step d-none" id="step2">');
+
+// add_field_in_col6($mform, 'text', 'department', get_string('department', 'local_registration_validation'));
+// add_field_in_col6($mform, 'text', 'municipality', get_string('municipality', 'local_registration_validation'));
+// add_field_in_col6($mform, 'text', 'ethnicity', get_string('ethnicity', 'local_registration_validation'));
+// add_field_in_col6($mform, 'text', 'professional_sector', get_string('professionalsector', 'local_registration_validation'));
+// add_field_in_col6($mform, 'text', 'institution', get_string('institution', 'local_registration_validation'));
+// add_field_in_col6($mform, 'text', 'professional_college', get_string('professionalcollege', 'local_registration_validation'));
+// add_field_in_col6($mform, 'text', 'member_number', get_string('membernumber', 'local_registration_validation'));
+
+// $mform->addElement('html', '</div>');
+
+
+// $mform->addElement('html', '<div class="form-step d-none" id="step3">');
+
+// // File
+// $mform->addElement('file', 'testfile', 'Professional Certificate');
+// $mform->addRule('testfile', null, 'required');
+
+// $mform->addElement('date_selector', 'experience_start_date', get_string('experience_start_date', 'local_registration_validation'));
+// $mform->addElement('date_selector', 'experience_expiry_date', get_string('experience_expiry_date', 'local_registration_validation'));
+
+// $mform->addElement('file', 'doc_dpi', 'Copy Of DPI');
+// $mform->addElement('file', 'contract', 'Contract');
+
+// $mform->addElement('html', '</div>');
+
+
+
+// $mform->addElement('html', '<div class="form-step d-none" id="step4">');
+
+// $mform->addElement('select', 'categoryid', get_string('category'));
+// $mform->setType('categoryid', PARAM_INT);
+// $mform->addElement('select', 'courseid', get_string('course'));
+// $mform->setType('courseid', PARAM_INT);
+
+// $mform->addElement('html', '<div class="text-center mt-4">');
+// $mform->addElement('submit', 'submitbutton', get_string('register', 'local_registration_validation'));
+// $mform->addElement('html', '</div>');
+
+// $mform->addElement('html', '</div>');
+
+
+// $mform->addElement('html', '
+//   <div class="step-buttons text-center mt-3">
+//     <button type="button" class="btn btn-secondary prev-step">Previous</button>
+//     <button type="button" class="btn btn-primary next-step">Next</button>
+//   </div>
+// ');
+
+// <script>
+// document.addEventListener("DOMContentLoaded", () => {
+//   const steps = document.querySelectorAll(".form-step");
+//   let current = 0;
+
+//   function showStep(index) {
+//     steps.forEach((s, i) => s.classList.toggle("d-none", i !== index));
+//   }
+
+//   document.querySelectorAll(".next-step").forEach(btn =>
+//     btn.addEventListener("click", () => {
+//       if (current < steps.length - 1) {
+//         current++;
+//         showStep(current);
+//       }
+//     })
+//   );
+
+//   document.querySelectorAll(".prev-step").forEach(btn =>
+//     btn.addEventListener("click", () => {
+//       if (current > 0) {
+//         current--;
+//         showStep(current);
+//       }
+//     })
+//   );
+
+//   showStep(current);
+// });
+// </script>
+
+
+
 ?>
+
+
+
+
+<?php
+
+// require_once(__DIR__.'/../../config.php');
+// require_once($CFG->libdir.'/formslib.php');
+
+// class multi_step_registration_form extends moodleform {
+//     public function definition() {
+//         $mform = $this->_form;
+
+//         // Step 1: Personal Info
+//         $mform->addElement('html', '<div class="form-step" id="step1">');
+
+//         $mform->addElement('text', 'dpi', get_string('dpicode', 'local_registration_validation'));
+//         $mform->setType('dpi', PARAM_TEXT);
+//         $mform->addElement('text', 'username', get_string('username'));
+//         $mform->setType('username', PARAM_TEXT);
+//         $mform->addElement('password', 'password', get_string('password'));
+//         $mform->setType('password', PARAM_TEXT);
+//         $mform->addElement('text', 'email', get_string('email'));
+//         $mform->setType('email', PARAM_EMAIL);
+//         $mform->addElement('text', 'firstname', get_string('firstname'));
+//         $mform->setType('firstname', PARAM_TEXT);
+//         $mform->addElement('text', 'lastname', get_string('lastname'));
+//         $mform->setType('lastname', PARAM_TEXT);
+//         $mform->addElement('select', 'gender', get_string('gender', 'local_registration_validation'), ['Male' => 'Male', 'Female' => 'Female']);
+//         $mform->addElement('text', 'phone', get_string('phone', 'local_registration_validation'));
+//         $mform->setType('phone', PARAM_TEXT);
+//         $mform->addElement('text', 'age', get_string('age', 'local_registration_validation'));
+//         $mform->setType('age', PARAM_INT);
+
+//         $mform->addElement('html', '<div class="step-buttons"><button type="button" class="btn btn-primary next-step">Next</button></div>');
+//         $mform->addElement('html', '</div>');
+
+//         // Step 2: Professional Info
+//         $mform->addElement('html', '<div class="form-step d-none" id="step2">');
+
+//         $mform->addElement('text', 'department', get_string('department', 'local_registration_validation'));
+//         $mform->addElement('text', 'municipality', get_string('municipality', 'local_registration_validation'));
+//         $mform->addElement('text', 'ethnicity', get_string('ethnicity', 'local_registration_validation'));
+//         $mform->addElement('text', 'professional_sector', get_string('professionalsector', 'local_registration_validation'));
+//         $mform->addElement('text', 'institution', get_string('institution', 'local_registration_validation'));
+//         $mform->addElement('text', 'professional_college', get_string('professionalcollege', 'local_registration_validation'));
+//         $mform->addElement('text', 'member_number', get_string('membernumber', 'local_registration_validation'));
+
+//         $mform->addElement('html', '<div class="step-buttons">
+//             <button type="button" class="btn btn-secondary prev-step">Previous</button>
+//             <button type="button" class="btn btn-primary next-step">Next</button>
+//         </div>');
+//         $mform->addElement('html', '</div>');
+
+//         // Step 3: Documents
+//         $mform->addElement('html', '<div class="form-step d-none" id="step3">');
+
+//         $mform->addElement('file', 'testfile', 'Professional Certificate');
+//         $mform->addRule('testfile', null, 'required');
+//         $mform->addElement('date_selector', 'experience_start_date', get_string('experience_start_date', 'local_registration_validation'));
+//         $mform->addElement('date_selector', 'experience_expiry_date', get_string('experience_expiry_date', 'local_registration_validation'));
+//         $mform->addElement('file', 'doc_dpi', 'Copy Of DPI');
+//         $mform->addElement('file', 'contract', 'Contract');
+
+//         $mform->addElement('html', '<div class="step-buttons">
+//             <button type="button" class="btn btn-secondary prev-step">Previous</button>
+//             <button type="button" class="btn btn-primary next-step">Next</button>
+//         </div>');
+//         $mform->addElement('html', '</div>');
+
+//         // Step 4: Submit
+//         $mform->addElement('html', '<div class="form-step d-none" id="step4">');
+
+//         $mform->addElement('select', 'categoryid', get_string('category'));
+//         $mform->setType('categoryid', PARAM_INT);
+//         $mform->addElement('select', 'courseid', get_string('course'));
+//         $mform->setType('courseid', PARAM_INT);
+
+//         $mform->addElement('html', '<div class="step-buttons">
+//             <button type="button" class="btn btn-secondary prev-step">Previous</button>
+//             <div class="text-center mt-4">
+//                 <input type="submit" name="submitbutton" value="'.get_string('register', 'local_registration_validation').'" class="btn btn-success" />
+//             </div>
+//         </div>');
+//         $mform->addElement('html', '</div>');
+
+//         // JS for step navigation
+//         $mform->addElement('html', '<script>
+//         document.addEventListener("DOMContentLoaded", () => {
+//             const steps = document.querySelectorAll(".form-step");
+//             let current = 0;
+
+//             function showStep(index) {
+//                 steps.forEach((s, i) => s.classList.toggle("d-none", i !== index));
+//             }
+
+//             document.querySelectorAll(".next-step").forEach(btn =>
+//                 btn.addEventListener("click", () => {
+//                     if (current < steps.length - 1) {
+//                         current++;
+//                         showStep(current);
+//                     }
+//                 })
+//             );
+
+//             document.querySelectorAll(".prev-step").forEach(btn =>
+//                 btn.addEventListener("click", () => {
+//                     if (current > 0) {
+//                         current--;
+//                         showStep(current);
+//                     }
+//                 })
+//             );
+
+//             showStep(current);
+//         });
+//         </script>');
+//     }
+// }
